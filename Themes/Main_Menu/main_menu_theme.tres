@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://40nioq1aq85y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wj5t"]
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_4wj5t")
+RichTextLabel/constants/outline_size = 20
+RichTextLabel/font_sizes/normal_font_size = 64

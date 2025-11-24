@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj6h4sqpbinj4"]
+
+[ext_resource type="Script" uid="uid://cdyvhp1rnv7mj" path="res://Scripts/token_window.gd" id="1_4isir"]
+[ext_resource type="FontFile" uid="uid://ckhm8rf0gkall" path="res://Fonts/PressStart2P.ttf" id="2_n1jjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s76bp"]
+content_margin_left = 25.0
+content_margin_top = 25.0
+content_margin_right = 25.0
+content_margin_bottom = 25.0
+bg_color = Color(0.22493434, 0.11408872, 0.37079877, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfifp"]
+bg_color = Color(0.0018410675, 0.0018410685, 0.0018410663, 1)
+
+[sub_resource type="Theme" id="Theme_kenuh"]
+Button/constants/line_spacing = 4
+Button/fonts/font = ExtResource("2_n1jjq")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("2_n1jjq")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_s76bp")
+RichTextLabel/constants/line_separation = 30
+RichTextLabel/fonts/normal_font = ExtResource("2_n1jjq")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_xfifp")
+
+[node name="TokenWindow" type="CanvasLayer" node_paths=PackedStringArray("token_alert")]
+script = ExtResource("1_4isir")
+token_alert = NodePath("PanelContainer/VBoxContainer/TokenAlert")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(500, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -124.0
+offset_right = 474.00012
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_kenuh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Titletext" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "AVISO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TokenAlert" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Usuario 1 quiere modificar ‘Dead Cells’"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Acept" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "Dar token"
+autowrap_mode = 2
+
+[node name="Deny" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "No, el token ya está en uso"
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Deny" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "No, el token ya está en uso"
+autowrap_mode = 2
+
+[node name="Acept" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "Dar token"
+autowrap_mode = 2
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Acept" to="." method="_on_acept_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Deny" to="." method="_on_deny_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/Deny" to="." method="_on_deny_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/Acept" to="." method="_on_acept_pressed"]

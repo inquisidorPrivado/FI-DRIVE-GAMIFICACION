@@ -1,0 +1,218 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6j6oodvrc2e1"]
+
+[ext_resource type="Script" uid="uid://p56idx4eymu" path="res://Scripts/pause_interface.gd" id="1_y7drc"]
+[ext_resource type="FontFile" uid="uid://ckhm8rf0gkall" path="res://Fonts/PressStart2P.ttf" id="2_lyvos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7s7x"]
+content_margin_top = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.06053038, 0.06053035, 0.060530283, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpvp3"]
+content_margin_left = 30.0
+content_margin_top = 20.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.28851816, 0.28851792, 0.28851807, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7drc"]
+content_margin_left = 10.0
+bg_color = Color(0.36651462, 0.09775328, 0.29531625, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_frk7y"]
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("2_lyvos")
+Label/styles/normal = SubResource("StyleBoxFlat_e7s7x")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_rpvp3")
+RichTextLabel/fonts/normal_font = ExtResource("2_lyvos")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_y7drc")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdk2r"]
+bg_color = Color(0.08468992, 0.08468994, 0.08468988, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7ynf"]
+bg_color = Color(0.25617734, 2.5220514e-05, 0.9953025, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orfyk"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_mb1b0"]
+Button/constants/line_spacing = 10
+Button/fonts/font = ExtResource("2_lyvos")
+Button/styles/normal = SubResource("StyleBoxFlat_pdk2r")
+Label/fonts/font = ExtResource("2_lyvos")
+Label/styles/normal = SubResource("StyleBoxFlat_f7ynf")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_orfyk")
+
+[node name="PauseInterface" type="CanvasLayer" node_paths=PackedStringArray("server_1_text", "server_2_text", "server_3_text", "server_4_text", "server_5_text", "token_1_text", "token_2_text", "token_3_text") groups=["Snapshot"]]
+process_mode = 3
+layer = 5
+script = ExtResource("1_y7drc")
+server_1_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Servidor_1")
+server_2_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Servidor_2")
+server_3_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Servidor_3")
+server_4_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Servidor_4")
+server_5_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Servidor_5")
+token_1_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Token_1")
+token_2_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Token_2")
+token_3_text = NodePath("Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer/Token_3")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatisticsContainer" type="PanelContainer" parent="Interface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 1
+theme = SubResource("Theme_frk7y")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Interface/HBoxContainer/StatisticsContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="Servidor_1" type="Label" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carga del Servidor 1: 0/5"
+
+[node name="Servidor_2" type="Label" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carga del Servidor 2: 0/5"
+
+[node name="Servidor_3" type="Label" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carga del Servidor 3: 0/5"
+
+[node name="Servidor_4" type="Label" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carga del Servidor 4: 0/5"
+
+[node name="Servidor_5" type="Label" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Carga del Servidor 5: 0/5"
+
+[node name="Token_1" type="RichTextLabel" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(875, 45)
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave]Token \"\": Libre[/wave]"
+vertical_alignment = 1
+
+[node name="Token_2" type="RichTextLabel" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(875, 45)
+layout_mode = 2
+bbcode_enabled = true
+text = "sf"
+vertical_alignment = 1
+
+[node name="Token_3" type="RichTextLabel" parent="Interface/HBoxContainer/StatisticsContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(875, 45)
+layout_mode = 2
+bbcode_enabled = true
+text = "sf"
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="PanelContainer" parent="Interface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = SubResource("Theme_mb1b0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/HBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Pause" type="Label" parent="Interface/HBoxContainer/ButtonsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Auditoria
+(Pausa)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="Interface/HBoxContainer/ButtonsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Continuar 
+partida"
+autowrap_mode = 2
+
+[node name="Restart" type="Button" parent="Interface/HBoxContainer/ButtonsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Reiniciar partida"
+autowrap_mode = 2
+
+[node name="MainMenu" type="Button" parent="Interface/HBoxContainer/ButtonsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Regresar al menú principal"
+autowrap_mode = 2
+
+[node name="Exit" type="Button" parent="Interface/HBoxContainer/ButtonsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Salir 
+del juego"
+autowrap_mode = 2
+
+[connection signal="pressed" from="Interface/HBoxContainer/ButtonsContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Interface/HBoxContainer/ButtonsContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Interface/HBoxContainer/ButtonsContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Interface/HBoxContainer/ButtonsContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

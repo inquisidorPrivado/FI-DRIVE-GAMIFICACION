@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://befufoay4672p"]
+
+[ext_resource type="Texture2D" uid="uid://cqumq6kxfpcgu" path="res://Sprites/server_1.png" id="1_ogqfs"]
+[ext_resource type="Script" uid="uid://dk6rwujnh00tk" path="res://server.gd" id="2_8wms1"]
+[ext_resource type="Theme" uid="uid://dv3caxg56tany" path="res://Themes/server_theme.tres" id="2_mdagj"]
+[ext_resource type="FontFile" uid="uid://ckhm8rf0gkall" path="res://Fonts/PressStart2P.ttf" id="3_2swk3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wms1"]
+bg_color = Color(0.4862745, 0.09411765, 0.23529412, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="Theme" id="Theme_g4gju"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_8wms1")
+RichTextLabel/font_sizes/normal_font_size = 56
+RichTextLabel/fonts/normal_font = ExtResource("3_2swk3")
+
+[node name="Server" type="Sprite2D" node_paths=PackedStringArray("game_over_timer", "maxium_processes_timer", "timer_text", "timer_container", "process_text", "maximum_processes_container", "load_balancing")]
+scale = Vector2(0.141, 0.141)
+texture = ExtResource("1_ogqfs")
+script = ExtResource("2_8wms1")
+game_over_timer = NodePath("GameOverTimer")
+maxium_processes_timer = NodePath("MaxiumProcessesTimer")
+timer_text = NodePath("TimerContainer/TimerText")
+timer_container = NodePath("TimerContainer")
+set_time = 10
+process_text = NodePath("MaximumProcesses/ProcessText")
+maximum_processes_container = NodePath("MaximumProcesses")
+load_balancing = NodePath("LoadBalancing")
+
+[node name="TimerContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(100, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.46082
+offset_top = -519.1212
+offset_right = -191.46082
+offset_bottom = -319.12122
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_g4gju")
+
+[node name="TimerText" type="RichTextLabel" parent="TimerContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+bbcode_enabled = true
+text = "[shake rate=20.0 level=15 connected=0]10[/shake]"
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadBalancing" type="Button" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -249.26248
+offset_right = 64.0
+offset_bottom = -149.26245
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_mdagj")
+text = "Balancear Carga"
+
+[node name="MaximumProcesses" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(800, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -656.0
+offset_top = -15.219849
+offset_right = 144.0
+offset_bottom = 84.78015
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_mdagj")
+
+[node name="ProcessText" type="RichTextLabel" parent="MaximumProcesses"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Carga del servidor: 0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverTimer" type="Timer" parent="."]
+
+[node name="MaxiumProcessesTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="LoadBalancing" to="." method="_on_load_balancing_pressed"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
+[connection signal="timeout" from="MaxiumProcessesTimer" to="." method="_on_maxium_processes_timer_timeout"]

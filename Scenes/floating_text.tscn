@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba8ilrfjnisry"]
+
+[ext_resource type="Script" uid="uid://c4scncbl04n2y" path="res://Scripts/floating_text.gd" id="1_rsmp3"]
+[ext_resource type="Shader" uid="uid://bywth7ldd8005" path="res://Shaders/animated_pixel_art_text.gdshader" id="2_vdsff"]
+[ext_resource type="FontFile" uid="uid://ckhm8rf0gkall" path="res://Fonts/PressStart2P.ttf" id="3_678gf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tm8qt"]
+shader = ExtResource("2_vdsff")
+shader_parameter/jitter_strength = 0.0
+shader_parameter/jitter_speed = 0.1
+shader_parameter/jitter_frequency = 0.1
+shader_parameter/separate_xy = false
+shader_parameter/time_offset = 0.0
+shader_parameter/enable_rotation = false
+shader_parameter/rotation_strength = 5.089
+shader_parameter/rotation_speed = 0.643
+shader_parameter/rotation_frequency = 0.1
+shader_parameter/enable_scaling = true
+shader_parameter/scale_strength = 0.041
+shader_parameter/scale_speed = 0.673
+shader_parameter/scale_frequency = 6.0
+shader_parameter/base_scale = 1.0
+shader_parameter/text_color = Color(0.69013613, 0.2388798, 0, 1)
+shader_parameter/use_custom_color = true
+shader_parameter/shake_intensity = 0.083
+shader_parameter/enable_pixelation = true
+shader_parameter/pixel_size = 1.0
+shader_parameter/adaptive_pixels = true
+shader_parameter/enable_outline = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 3.0
+shader_parameter/chromatic_aberration = true
+shader_parameter/aberration_strength = 1.0
+
+[node name="FloatingText" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_rsmp3")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Text" type="Label" parent="Interface"]
+material = SubResource("ShaderMaterial_tm8qt")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -11.0
+offset_right = 129.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_678gf")
+theme_override_font_sizes/font_size = 24
+text = "RESISTANCE
+"
+horizontal_alignment = 1
+vertical_alignment = 1

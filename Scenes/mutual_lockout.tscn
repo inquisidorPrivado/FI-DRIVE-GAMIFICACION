@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://ba2mnvdxt1gbc"]
+
+[ext_resource type="Script" uid="uid://d0bs2ssniyte4" path="res://Scripts/mutual_lockout.gd" id="1_mt4e6"]
+[ext_resource type="FontFile" uid="uid://ckhm8rf0gkall" path="res://Fonts/PressStart2P.ttf" id="2_ythac"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j58u1"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_gpgrm"]
+RichTextLabel/constants/line_separation = 30
+RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabel/fonts/normal_font = ExtResource("2_ythac")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_j58u1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrm3i"]
+bg_color = Color(0.5796393, 0.31905586, 0.8290258, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.3679803, 0.34996095, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhr4k"]
+bg_color = Color(0.76157904, 0.11655236, 0.7080603, 1)
+
+[sub_resource type="Theme" id="Theme_6147c"]
+Button/fonts/font = ExtResource("2_ythac")
+Button/styles/normal = SubResource("StyleBoxFlat_rrm3i")
+Button/styles/pressed = SubResource("StyleBoxFlat_vhr4k")
+
+[node name="MutualLockout" type="CanvasLayer" node_paths=PackedStringArray("title_text", "description", "break_the_cycle_button", "random_position_timer")]
+script = ExtResource("1_mt4e6")
+title_text = NodePath("Interface/ColorRect/VBoxContainer/TitleText")
+description = NodePath("Interface/ColorRect/VBoxContainer/Description")
+break_the_cycle_button = NodePath("BreakTheCycle")
+random_position_timer = NodePath("RandomPositionTimer")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_gpgrm")
+
+[node name="ColorRect" type="ColorRect" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.019607844, 0.019607844, 0.019607844, 0.8117647)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="TitleText" type="RichTextLabel" parent="Interface/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[shake]¡BLOQUEO MUTÚO![/shake]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="Interface/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(1100, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "El Proceso 1 tiene el \"Archivo A\" y pide el \"Archivo B\". El Proceso 2 tiene el \"Archivo B\" y pide el \"Archivo A\"’"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BreakTheCycle" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 100)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -108.0
+offset_right = 150.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_6147c")
+text = "¡ROMPER CICLO!"
+
+[node name="RandomPositionTimer" type="Timer" parent="."]
+wait_time = 0.7
+
+[connection signal="pressed" from="BreakTheCycle" to="." method="_on_break_the_cycle_pressed"]
+[connection signal="timeout" from="RandomPositionTimer" to="." method="_on_random_position_timer_timeout"]

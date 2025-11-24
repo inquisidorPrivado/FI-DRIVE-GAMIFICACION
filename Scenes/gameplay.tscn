@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8ca7dm0iijac"]
+
+[ext_resource type="PackedScene" uid="uid://befufoay4672p" path="res://Scenes/server.tscn" id="1_hf1ha"]
+[ext_resource type="Script" uid="uid://c7ty3hge0bon6" path="res://Scripts/gameplay.gd" id="1_kwrm5"]
+[ext_resource type="PackedScene" uid="uid://bsftulmbai2rf" path="res://Scenes/head_bar.tscn" id="1_m34ki"]
+[ext_resource type="PackedScene" uid="uid://c6j6oodvrc2e1" path="res://Scenes/pause_interface.tscn" id="3_kwrm5"]
+[ext_resource type="PackedScene" uid="uid://dj6h4sqpbinj4" path="res://Scenes/token_window.tscn" id="5_1qnfl"]
+[ext_resource type="PackedScene" uid="uid://pp36vlm27ngf" path="res://Scenes/game_over.tscn" id="5_r8bcl"]
+[ext_resource type="PackedScene" uid="uid://ba2mnvdxt1gbc" path="res://Scenes/mutual_lockout.tscn" id="5_rlidi"]
+
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("server_1_text", "server_2_text", "server_3_text", "server_4_text", "server_5_text", "mutual_lockout", "head_bar", "token_window_node", "process_assignment") groups=["Gameplay"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kwrm5")
+server_1_text = NodePath("Server")
+server_2_text = NodePath("Server2")
+server_3_text = NodePath("Server3")
+server_4_text = NodePath("Server4")
+server_5_text = NodePath("Server5")
+mutual_lockout = NodePath("MutualLockout")
+head_bar = NodePath("HeadBar")
+token_window_node = NodePath("TokenWindow")
+process_assignment = NodePath("ProcessAssignment")
+
+[node name="HeadBar" parent="." node_paths=PackedStringArray("pause_interface") instance=ExtResource("1_m34ki")]
+pause_interface = NodePath("../PauseInterface")
+
+[node name="Server" parent="." instance=ExtResource("1_hf1ha")]
+position = Vector2(240, 260)
+scale = Vector2(0.38, 0.38)
+
+[node name="Server2" parent="." instance=ExtResource("1_hf1ha")]
+position = Vector2(900, 260)
+scale = Vector2(0.38, 0.38)
+
+[node name="Server3" parent="." instance=ExtResource("1_hf1ha")]
+position = Vector2(239.99998, 513)
+scale = Vector2(0.38, 0.38)
+
+[node name="Server4" parent="." instance=ExtResource("1_hf1ha")]
+position = Vector2(900, 513)
+scale = Vector2(0.38, 0.38)
+
+[node name="Server5" parent="." instance=ExtResource("1_hf1ha")]
+position = Vector2(570, 360)
+scale = Vector2(0.38, 0.38)
+
+[node name="PauseInterface" parent="." instance=ExtResource("3_kwrm5")]
+visible = false
+
+[node name="TokenWindow" parent="." instance=ExtResource("5_1qnfl")]
+visible = false
+
+[node name="MutualLockout" parent="." instance=ExtResource("5_rlidi")]
+visible = false
+
+[node name="GameOver" parent="." instance=ExtResource("5_r8bcl")]
+visible = false
+
+[node name="ProcessAssignment" type="Timer" parent="."]
+wait_time = 0.73
+
+[connection signal="timeout" from="ProcessAssignment" to="." method="_on_process_assignment_timeout"]

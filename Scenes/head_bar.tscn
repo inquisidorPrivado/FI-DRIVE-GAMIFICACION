@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsftulmbai2rf"]
+
+[ext_resource type="Theme" uid="uid://bgkva7ygrdknv" path="res://Themes/Headbar_theme.tres" id="1_0gccd"]
+[ext_resource type="Theme" uid="uid://boirs81dgw3ol" path="res://Themes/message_theme.tres" id="1_4pkxf"]
+[ext_resource type="Script" uid="uid://b2qe1g4nmy0ju" path="res://Scripts/head_bar.gd" id="1_5j1o0"]
+[ext_resource type="Theme" uid="uid://d366rcxm734cm" path="res://Themes/name_container_theme.tres" id="2_5j1o0"]
+
+[node name="HeadBar" type="CanvasLayer" node_paths=PackedStringArray("message_text")]
+script = ExtResource("1_5j1o0")
+message_text = NodePath("Interface/VBoxContainer/PlayerBar/Message")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 174.0
+grow_horizontal = 2
+
+[node name="Notifications" type="PanelContainer" parent="Interface/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_0gccd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/VBoxContainer/Notifications"]
+layout_mode = 2
+
+[node name="NameContainer" type="PanelContainer" parent="Interface/VBoxContainer/Notifications/HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme = ExtResource("2_5j1o0")
+
+[node name="Name" type="RichTextLabel" parent="Interface/VBoxContainer/Notifications/HBoxContainer/NameContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave]FI Drive[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pause" type="Button" parent="Interface/VBoxContainer/Notifications/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SNAPSHOT
+(Pausa)"
+
+[node name="PlayerBar" type="PanelContainer" parent="Interface/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("1_4pkxf")
+
+[node name="Message" type="RichTextLabel" parent="Interface/VBoxContainer/PlayerBar"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[rainbow freq=0.1 sat=0.9 val=0.9 speed=1.0]USUARIO 1[/rainbow] accedió al archivo “Dead Cells”."
+vertical_alignment = 1
+
+[connection signal="pressed" from="Interface/VBoxContainer/Notifications/HBoxContainer/Pause" to="." method="_on_pause_pressed"]
